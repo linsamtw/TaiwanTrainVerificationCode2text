@@ -74,7 +74,7 @@ def main(image):
             total_set.append( chr(i) )
         for i in range(10):
             total_set.append(str(i))
-    
+        total_set.append('')
         for i in range(len(pred_prob)):
             if pred_prob[i] == max( pred_prob ):
                 value = (total_set[i])
