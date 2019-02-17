@@ -3,8 +3,6 @@ from PIL import Image, ImageDraw, ImageFont
 from random import randint
 import os
 import sys
-#import matplotlib.pyplot as plt
-# __file__ = '/home/linsam/project1/master/github/verification_code2text/Stock.py'
 PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
 sys.path.append(PATH)
 

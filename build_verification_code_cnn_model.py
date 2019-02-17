@@ -13,7 +13,6 @@ from keras.models import Model
 from keras.layers import Input, Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 
 from keras.optimizers import RMSprop
-# __file__ = '/home/linsam/project1/master/github/verification_code2text/Stock.py'
 PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
 sys.path.append(PATH)
 

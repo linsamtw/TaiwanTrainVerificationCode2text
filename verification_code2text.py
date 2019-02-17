@@ -4,7 +4,6 @@ import os
 import sys
 #============================================
 # my function / class
-# __file__ = '/home/linsam/project1/master/github/verification_code2text/Stock.py'
 PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
 sys.path.append(PATH)
 #============================================
