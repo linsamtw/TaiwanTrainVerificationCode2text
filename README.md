@@ -9,6 +9,8 @@
 提供各位開發程式訂票，其中驗證碼破解部分的方法，可直接使用，不須再回傳 image 用人工方式辨識。<br>
 此 package 使用 keras & Tensorflow 建模&預測，需要安裝相依 package。
 
+model test data 準確率約為 88%，使用 10 萬張圖進行 training。
+
 -------------------
 
 	pip3 install TaiwanTrainVerificationCode2text
