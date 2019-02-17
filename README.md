@@ -5,7 +5,7 @@
 [![PyPI version](https://badge.fury.io/py/TaiwanTrainVerificationCode2text.svg)](https://badge.fury.io/py/TaiwanTrainVerificationCode2text)
 
 -------------------
-#### introduce
+## introduce
 提供各位開發程式訂票，其中驗證碼破解部分的方法，可直接使用，不須再回傳 image 用人工方式辨識。<br>
 此 package 使用 keras & Tensorflow 建模&預測，需要安裝相依 package。
 
@@ -21,7 +21,7 @@ cv2 比較難裝，以下提供安裝方法
 
 ---------------------------------
 
-#### demo
+## demo
 	input 
 ![image](https://raw.githubusercontent.com/linsamtw/TaiwanTrainVerificationCode2text/master/WNBA8S.jpg)
 
@@ -30,7 +30,7 @@ WNBA8S
 
 --------------------
 
-#### exmaple 
+## exmaple 
 
     import os
     from TaiwanTrainVerificationCode2text import verification_code2text
@@ -89,11 +89,11 @@ WNBA8S
 
 --------------------------
 
-#### 方法
+## 方法
 由於驗證碼是26個英文字搭配10個數字，再加上隨機 5~6 碼，我將 class 分成 26 + 10 + null，37類，下去做分類。<br>
 null 代表沒有此文字， 我將 NN 結構中的 output 設計為 6 dimension，將5碼也看成6碼，只是最後一個是 null，藉此同時處理 5 or 6 碼問題。<br>
 ----------------
-#### future
+## future
 面臨到最大的問題是，null 佔比例太大，以上面生成 data 的 code 為例
 
         work_vcode.work_vcode_fun(500,'train_data',5)
