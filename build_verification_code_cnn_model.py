@@ -13,7 +13,7 @@ from keras.models import Model
 from keras.layers import Input, Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 
 from keras.optimizers import RMSprop
-PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
+PATH = "/".join( os.path.abspath(__file__).split('/')[:])
 sys.path.append(PATH)
 
 #=====================================================================
@@ -46,7 +46,7 @@ class build_verification_code_cnn_model:
     #===============================================================
     
     def input_data(self,file_path,n):
-        file_path = '{}/{}/'.format(PATH,file_path)
+        file_path = '/{}/{}/'.format(PATH,file_path)
         train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:n]
         #-------------------------------------------------------
         def change_onehotencoder(text_set,total_set):
@@ -147,7 +147,7 @@ class build_verification_code_cnn_model:
         # model.summary()
 
         history = model.fit(self.train_data,self.train_labels, 
-                            batch_size = 512, epochs=10, verbose=1, 
+                            batch_size = 512, epochs=20, verbose=1, 
                             validation_data=(self.test_data,self.test_labels) )
         
         self.model = model
@@ -212,7 +212,7 @@ class build_verification_code_cnn_model:
         #----------------------------------------------------------------
         #-----------------------------------------------
         def compare_final_error(file_path,self,data):
-            # file_path = 'train_data'
+            # file_path = 'test_data'
             # data = self.train_data
             file_path = '{}/{}/'.format(PATH,file_path)
             train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:len(data)]
@@ -224,8 +224,14 @@ class build_verification_code_cnn_model:
                 text = text.replace('.jpg','')
                 labels_set.append( text )
             #----------------------------------------------------------------
+            prediction = self.model.predict(data, verbose=1)
             amount = len(labels_set)
             resultlist = ["" for _ in range(amount)]
+            
+            for i in range(amount):
+                for j in range(len(prediction)):
+                    #print(j)
+                    resultlist[i] += change_character(prediction[j][i],self.total_set)
             #----------------------------------------------------------------
             total = len(resultlist)
             score = 0
@@ -237,14 +243,14 @@ class build_verification_code_cnn_model:
         #----------------------------------------------------------------
         v1 = compare_error('train_data',self,self.train_data) 
         v2 = compare_error('test_data',self,self.test_data) 
-        v3 = compare_final_error('train_data',self,self.train_data)
+        v3 = 0#compare_final_error('train_data',self,self.train_data)
         v4 = compare_final_error('test_data',self,self.test_data)
         
         return v1,v2,v3,v4  
     #===============================================================
     def show_train_history(self):#(train = 'acc', validation = 'val_acc'):
         plt.figure(figsize = (10,10)) # change figure size
-        for i in range(1,6,1):
+        for i in range(1,7,1):
             #print(i)
             plt.plot( self.history.history['digit'+str(i)+'_acc'] )
             plt.plot( self.history.history['val_digit'+str(i)+'_acc'] )
@@ -257,7 +263,8 @@ class build_verification_code_cnn_model:
                     'digit2_acc','val_digit2_acc',
                     'digit3_acc','val_digit3_acc',
                     'digit4_acc','val_digit4_acc',
-                    'digit5_acc','val_digit5_acc'],loc = 'upper left')
+                    'digit5_acc','val_digit5_acc',
+                    'digit6_acc','val_digit6_acc'],loc = 'upper left')
     #===============================================================
     #===============================================================
 
@@ -267,8 +274,9 @@ def main():
     work_vcode.work_vcode_fun(500,'train_data',5)
     work_vcode.work_vcode_fun(500,'train_data',6)
     
-    work_vcode.work_vcode_fun(100,'test_data',5)
-    work_vcode.work_vcode_fun(100,'test_data',6)
+    work_vcode.work_vcode_fun(10,'test_data',5)
+    work_vcode.work_vcode_fun(10,'test_data',6)
+    
     self = build_verification_code_cnn_model()
     self.build_model_process()    
 
