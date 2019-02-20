@@ -1,7 +1,7 @@
 
 
 import urllib
-import os
+import os,sys
 
 import platform
 if 'Windows' in platform.platform():
