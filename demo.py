@@ -21,9 +21,10 @@ work_vcode.work_vcode_fun(10,'test_data',6)
 
 if 'Windows' in platform.platform():
     file_path = '{}/{}/'.format(PATH,'test_data')
+    train_image_path = [file_path + i for i in os.listdir(file_path+'/')]
 else:
     file_path = '{}\\{}\\'.format(PATH,'test_data')
-train_image_path = [file_path + i for i in os.listdir(file_path+'/')]
+    train_image_path = [file_path + i for i in os.listdir(file_path+'\\')]
 
 image_name = train_image_path[random.sample( range(len(train_image_path)) ,1)[0]]
 
