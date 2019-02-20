@@ -55,8 +55,9 @@ WNBA8S
     	file_path = '{}/{}/'.format(PATH,'test_data')
     	train_image_path = [file_path + i for i in os.listdir(file_path+'/')]
     else:
-	file_path = '{}\\{}\\'.format(PATH,'test_data')
-    	train_image_path = [file_path + i for i in os.listdir(file_path+'\\')]
+    	file_path = '{}\\{}\\'.format(PATH,'test_data')
+		train_image_path = [file_path + i for i in os.listdir(file_path+'\\')]
+	
     # 隨機取一個當作 demo
     image_name = train_image_path[random.sample( range(len(train_image_path)) ,1)[0]]
     # 讀取圖片
