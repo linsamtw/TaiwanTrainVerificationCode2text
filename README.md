@@ -34,40 +34,42 @@ WNBA8S
 
 ## exmaple 
 
-    import os
-    import platform
-    from TaiwanTrainVerificationCode2text import verification_code2text
-    from TaiwanTrainVerificationCode2text import work_vcode 
-    from TaiwanTrainVerificationCode2text import download 
-    import TaiwanTrainVerificationCode2text
-    PATH = TaiwanTrainVerificationCode2text.__path__[0]
-    import cv2
-    import matplotlib.pyplot as plt
-    import random
-
-    # 下載我 train 好的 weight，ttf 是驗證碼字形，用於以下生成模擬驗證碼
-    download.weight()
-    download.ttf()
-    # 生成模擬驗證碼
-    work_vcode.work_vcode_fun(10,'test_data',5)
-    work_vcode.work_vcode_fun(10,'test_data',6)
-    if 'Windows' in platform.platform():
-    	file_path = '{}/{}/'.format(PATH,'test_data')
-    	train_image_path = [file_path + i for i in os.listdir(file_path+'/')]
-    else:
-    	file_path = '{}\\{}\\'.format(PATH,'test_data')
-		train_image_path = [file_path + i for i in os.listdir(file_path+'\\')]
+	import os
+	import platform
+	from TaiwanTrainVerificationCode2text import verification_code2text
+	from TaiwanTrainVerificationCode2text import work_vcode 
+	from TaiwanTrainVerificationCode2text import download 
+	import TaiwanTrainVerificationCode2text
+	PATH = TaiwanTrainVerificationCode2text.__path__[0]
+	import cv2
+	import matplotlib.pyplot as plt
+	import random
+	from datetime import datetime
 	
-    # 隨機取一個當作 demo
-    image_name = train_image_path[random.sample( range(len(train_image_path)) ,1)[0]]
-    # 讀取圖片
-    image = cv2.imread(image_name)
-    # 畫圖
-    plt.imshow(image)
-    # 辨識，驗證碼轉文字
-    text = verification_code2text.main(image)
-    # 印出最後結果
-    print(text)
+	# 下載我 train 好的 weight，ttf 是驗證碼字形，用於以下生成模擬驗證碼
+	download.weight()
+	download.ttf()
+	# 生成模擬驗證碼
+	work_vcode.work_vcode_fun(10,'test_data',5)
+	work_vcode.work_vcode_fun(10,'test_data',6)
+
+	if 'Windows' in platform.platform():
+	    file_path = '{}/{}/'.format(PATH,'test_data')
+	    train_image_path = [file_path + i for i in os.listdir(file_path+'/')]
+	else:
+	    file_path = '{}\\{}\\'.format(PATH,'test_data')
+	    train_image_path = [file_path + i for i in os.listdir(file_path+'\\')]
+	# 隨機取一個當作 demo
+	image_name = train_image_path[random.sample( range(len(train_image_path)) ,1)[0]]
+
+	# 讀取圖片
+	image = cv2.imread(image_name)
+	# 畫圖
+	plt.imshow(image)
+	# 辨識，驗證碼轉文字
+	text = verification_code2text.main(image)
+	# 印出最後結果
+	print(text)
 
 最後結果就會類似 demo ，
 
