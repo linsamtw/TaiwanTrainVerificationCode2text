@@ -46,8 +46,10 @@ def load_model():
     
     # Define the optimizer
     model.compile(loss='categorical_crossentropy', optimizer='Adamax', metrics=['accuracy'])
-                  
-    model.load_weights('{}/cnn_weight/verificatioin_code.h5'.format(PATH)) 
+    if 'Windows' in platform.platform():
+        model.load_weights('{}\\cnn_weight\\verificatioin_code.h5'.format(PATH)) 
+    else:
+        model.load_weights('{}/cnn_weight/verificatioin_code.h5'.format(PATH)) 
     
     return model
 

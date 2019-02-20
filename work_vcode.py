@@ -6,13 +6,13 @@ import sys
 import platform
 if 'Windows' in platform.platform():
     PATH = "\\".join( os.path.abspath(__file__).split('\\')[:-1])
+    FONTPATH = ["{}\\Times Bold.ttf".format(PATH),
+            "{}\\Courier-BoldRegular.ttf".format(PATH)]
 else:
     PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
-sys.path.append(PATH)
-sys.path.append(PATH)
-
-FONTPATH = ["{}/Times Bold.ttf".format(PATH),
+    FONTPATH = ["{}/Times Bold.ttf".format(PATH),
             "{}/Courier-BoldRegular.ttf".format(PATH)]
+sys.path.append(PATH)
 
 
 #FONTPATH = ["Times Bold.ttf"]
@@ -124,7 +124,10 @@ def work_vcode_fun(amount,file_path,amount2):# amount = 5 ; file_path = 'test_da
             newtext.draw(image=captcha)
             offset = newtext.next_offset
             numberstr += str(newtext.number)
-            
-        path = '{}/{}/{}.jpg'.format(PATH,file_path,numberstr)
-        captcha.convert("RGB").save(path, "JPEG")
+        if 'Windows' in platform.platform():
+            path = '{}\\{}\\{}.jpg'.format(PATH,file_path,numberstr)
+            captcha.convert("RGB").save(path, "JPEG")
+        else:
+            path = '{}/{}/{}.jpg'.format(PATH,file_path,numberstr)
+            captcha.convert("RGB").save(path, "JPEG")
 

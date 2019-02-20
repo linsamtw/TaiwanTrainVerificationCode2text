@@ -1,6 +1,7 @@
 
 
 import os
+import platform
 from TaiwanTrainVerificationCode2text import verification_code2text
 from TaiwanTrainVerificationCode2text import work_vcode 
 from TaiwanTrainVerificationCode2text import download 
@@ -18,8 +19,10 @@ download.ttf()
 work_vcode.work_vcode_fun(10,'test_data',5)
 work_vcode.work_vcode_fun(10,'test_data',6)
 
-
-file_path = '{}/{}/'.format(PATH,'test_data')
+if 'Windows' in platform.platform():
+    file_path = '{}/{}/'.format(PATH,'test_data')
+else:
+    file_path = '{}\\{}\\'.format(PATH,'test_data')
 train_image_path = [file_path + i for i in os.listdir(file_path+'/')]
 
 image_name = train_image_path[random.sample( range(len(train_image_path)) ,1)[0]]

@@ -47,12 +47,19 @@ class build_verification_code_cnn_model:
         os.chdir(PATH)
         if 'cnn_weight' not in os.listdir():
             os.makedirs('cnn_weight')
-        self.model.save_weights('{}/cnn_weight/verificatioin_code.h5'.format(PATH))
+        if 'Windows' in platform.platform():
+            self.model.save_weights('{}\\cnn_weight\\verificatioin_code.h5'.format(PATH))
+        else:
+            self.model.save_weights('{}/cnn_weight/verificatioin_code.h5'.format(PATH))
     #===============================================================
     
     def input_data(self,file_path,n):
-        file_path = '/{}/{}/'.format(PATH,file_path)
-        train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:n]
+        if 'Windows' in platform.platform():
+            file_path = '\\{}\\{}\\'.format(PATH,file_path)
+            train_image_path = [file_path + i for i in os.listdir(file_path+'\\')][:n]
+        else:
+            file_path = '/{}/{}/'.format(PATH,file_path)
+            train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:n]
         #-------------------------------------------------------
         def change_onehotencoder(text_set,total_set):
                 
@@ -175,8 +182,12 @@ class build_verification_code_cnn_model:
             return value
         #-----------------------------------------------
         def compare_error(file_path,self,data):
-            file_path = '{}/{}/'.format(PATH,file_path)
-            train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:len(data)]
+            if 'Windows' in platform.platform():
+                file_path = '\\{}\\{}\\'.format(PATH,file_path)
+                train_image_path = [file_path + i for i in os.listdir(file_path+'\\')][:len(data)]
+            else:
+                file_path = '/{}/{}/'.format(PATH,file_path)
+                train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:len(data)]
             
             labels_set=[]
     
@@ -219,8 +230,12 @@ class build_verification_code_cnn_model:
         def compare_final_error(file_path,self,data):
             # file_path = 'test_data'
             # data = self.train_data
-            file_path = '{}/{}/'.format(PATH,file_path)
-            train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:len(data)]
+            if 'Windows' in platform.platform():
+                file_path = '\\{}\\{}\\'.format(PATH,file_path)
+                train_image_path = [file_path + i for i in os.listdir(file_path+'\\')][:len(data)]
+            else:
+                file_path = '/{}/{}/'.format(PATH,file_path)
+                train_image_path = [file_path + i for i in os.listdir(file_path+'/')][:len(data)]
             
             labels_set=[]
     

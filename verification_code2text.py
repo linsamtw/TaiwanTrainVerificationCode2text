@@ -41,8 +41,12 @@ def validation(test_path):
     os.chdir(PATH)
     if file_path not in os.listdir():
         os.makedirs(file_path)
-    file_path = '{}/{}/'.format(PATH,'success_vcode')
-    test_image_path = [file_path + i for i in os.listdir(file_path+'/')]
+    if 'Windows' in platform.platform():
+        file_path = '{}\\{}\\'.format(PATH,'success_vcode')
+        test_image_path = [file_path + i for i in os.listdir(file_path+'\\')]
+    else:
+        file_path = '{}/{}/'.format(PATH,'success_vcode')
+        test_image_path = [file_path + i for i in os.listdir(file_path+'/')]
     
     sum_count = len(test_image_path)
     data_set = np.ndarray(( sum_count , 60, 200,3), dtype=np.uint8)
@@ -58,7 +62,10 @@ def validation(test_path):
 #--------------------------------------------------
     real_labels = []
     for text in test_image_path:
-        text = text.split('/')
+        if 'Windows' in platform.platform():
+            text = text.split('\\')
+        else:
+            text = text.split('/')
         text = text[len(text)-1]
         text_set = text.replace('.png','')
         real_labels.append(text_set)
