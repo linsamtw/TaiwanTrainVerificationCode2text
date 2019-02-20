@@ -3,7 +3,12 @@ from PIL import Image, ImageDraw, ImageFont
 from random import randint
 import os
 import sys
-PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
+import platform
+if 'Windows' in platform.platform():
+    PATH = "\\".join( os.path.abspath(__file__).split('\\')[:-1])
+else:
+    PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
+sys.path.append(PATH)
 sys.path.append(PATH)
 
 FONTPATH = ["{}/Times Bold.ttf".format(PATH),

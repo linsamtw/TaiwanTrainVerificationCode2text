@@ -3,7 +3,12 @@
 import urllib
 import os
 
-PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
+import platform
+if 'Windows' in platform.platform():
+    PATH = "\\".join( os.path.abspath(__file__).split('\\')[:-1])
+else:
+    PATH = "/".join( os.path.abspath(__file__).split('/')[:-1])
+sys.path.append(PATH)
 
 def weight():
 

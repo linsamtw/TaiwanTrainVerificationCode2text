@@ -13,7 +13,12 @@ from keras.models import Model
 from keras.layers import Input, Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 
 from keras.optimizers import RMSprop
-PATH = "/".join( os.path.abspath(__file__).split('/')[:])
+import platform
+if 'Windows' in platform.platform():
+    PATH = "\\".join( os.path.abspath(__file__).split('\\')[:])
+else:
+    PATH = "/".join( os.path.abspath(__file__).split('/')[:])
+sys.path.append(PATH)
 sys.path.append(PATH)
 
 #=====================================================================
