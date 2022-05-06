@@ -114,5 +114,5 @@ null 代表沒有此文字， 我將 NN 結構中的 output 設計為 6 dimensio
 -----------------------
 如有問題，可寄信給我 or 留言在 issues。
 
-email : linsam.tw.github@gmail.com
+email : samlin266118@gmail.com
 
